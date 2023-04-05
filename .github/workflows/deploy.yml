@@ -1,0 +1,19 @@
+name: Deploy to Amazon EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Change to /var/www/html directory
+      run: |
+        cd /var/www/html
+        sudo git fetch --all
+        sudo git reset --hard origin/main
